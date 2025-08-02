@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react'
+import React, { useReducer, useState } from 'react'
 
 
 const counter = (state,action) => {
@@ -31,15 +31,18 @@ const counter = (state,action) => {
     count : 0
 }
 
+
 function UseReducer() {
 
     const [state,dispatch] = useReducer(counter,initialState)
+    const [input ,setInput] = useState(0)
+
 
     const HnadleInput = (e) => {
 
         dispatch(
             {type:"AmoutByInput",
-             nextValue: e.target.value  
+             nextValue: input 
             }
         )
 
@@ -55,12 +58,16 @@ function UseReducer() {
         onClick={() => {dispatch({type:"increment"})}}
         className='px-4 py-3 bg-blue-500 hover:cursor-pointer rounded-md text-2xl font-bold'>+</button>
       </div>
-      <div>
+      <div className='flex gap-4 justify-center items-center'>
         <input 
-        onChange={HnadleInput}
+        onChange={(e) => setInput(e.target.value)}
         className='h-10 w-30 border-2 border-black pl-3'
         type="number" name="" id=""
         placeholder='Enter Amount' />
+
+        <button 
+        onClick={HnadleInput}
+        className='px-4 py-2 bg-amber-400 rounded-md font-bold text-2xl hover:cursor-pointer hover:bg-amber-500'>Click</button>
       </div>
     </div>
   )
